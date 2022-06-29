@@ -110,28 +110,28 @@
               </el-icon>
             </div>
             <div class="icons">
-              <el-icon>
+              <!-- <el-icon>
                 <svg-icon className="svg-guide" icon="guide"></svg-icon>
-              </el-icon>
-              <el-icon>
+              </el-icon> -->
+              <!-- <el-icon>
                 <svg-icon className="svg-search" icon="search"></svg-icon>
-              </el-icon>
-              <el-icon>
+              </el-icon> -->
+              <!-- <el-icon>
                 <svg-icon
                   className="svg-fullscreen"
                   icon="fullscreen"
                 ></svg-icon>
-              </el-icon>
-              <el-icon>
+              </el-icon> -->
+              <!-- <el-icon>
                 <svg-icon
                   className="svg-change-theme"
                   icon="change-theme"
                 ></svg-icon>
-              </el-icon>
-              <el-icon>
+              </el-icon> -->
+              <!-- <el-icon>
                 <svg-icon className="svg-language" icon="language"></svg-icon>
-              </el-icon>
-              <img src="../../assets/1.png" class="img1" />
+              </el-icon> -->
+              <!-- <img src="../../assets/1.png" class="img1" /> -->
             </div>
           </div>
         </el-header>
@@ -172,7 +172,7 @@ const isCollapse = ref(false)
   height: 80px;
   .navbar {
     height: 50px;
-    background-color: aqua;
+    // background-color: aqua;
     .icon {
       width: 40px;
       height: 50px;

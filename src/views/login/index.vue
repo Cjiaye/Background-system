@@ -56,7 +56,7 @@ const inputType = ref('password')
 const LoginForm = ref()
 
 const loginForm = reactive({
-  username: 'super-admin',
+  username: 'admin',
   password: '123456'
 })
 
