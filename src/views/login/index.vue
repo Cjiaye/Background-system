@@ -47,6 +47,7 @@ import { reactive, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { validatePassword } from './rule'
+import { setTimeStamp } from '../../utils/auth'
 import md5 from 'md5'
 
 const store = useStore()
@@ -92,11 +93,18 @@ const handleLoginSubmit = async () => {
       newLoginForm.password = md5(newLoginForm.password)
 
       const response = await store.dispatch('user/login', newLoginForm)
+      await store.dispatch('user/getUserInfo')
+      //  await store.dispatch('user/login', newLoginForm)
+      console.log(response)
+      setTimeStamp()
       if (response.token) router.push('/')
     }
   })
 }
 
+/**
+ * 密码框状态切换方法
+ */
 const handllePassWordStatus = () => {
   inputType.value = inputType.value === 'password' ? 'text' : 'password'
 }

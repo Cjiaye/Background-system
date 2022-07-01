@@ -28,6 +28,12 @@
 // 导入axios
 import axios from 'axios'
 
+import store from '../store'
+
+import router from '../router'
+
+import { isCheckTimeout } from './auth'
+
 import md5 from 'md5'
 
 import loading from './loading'
@@ -52,7 +58,15 @@ service.interceptors.request.use(
     config.headers.codeType = time
 
     // TODO 将token 通过请求头发送给后台
-
+    const token = store.getters.token
+    console.log(token)
+    if (token) config.headers.Authorization = 'Beare ' + token
+    if (token) {
+      if (isCheckTimeout()) {
+        store.dispatch('/user/logout')
+        router.push('/login')
+      }
+    }
     return config
   },
   (error) => {
@@ -77,12 +91,19 @@ service.interceptors.response.use(
       _showError(message)
       return Promise.reject(new Error(message))
     }
-
-    // TODO token过期状态  401 描述信息  无感知登录 无感知刷新
   },
   (error) => {
     // 关闭loading加载
     loading.close()
+    // TODO token过期状态  401 描述信息  无感知登录 无感知刷新
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      store.dispatch('user/logout')
+      router.push('/login')
+    }
     // 响应失败进行信息提示
     _showError(error.message)
     return Promise.reject(error)
@@ -103,7 +124,7 @@ const request = (options) => {
   return service(options)
 }
 
-// 获取icode、
+// 获取icode
 function getTestICode() {
   const now = parseInt(Date.now() / 1000)
   const code = now + 'LGD_Sunday-1991'
