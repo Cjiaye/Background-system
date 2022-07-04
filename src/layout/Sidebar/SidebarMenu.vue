@@ -32,7 +32,8 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { filterMenuData } from '../../utils/menu'
 import SidebarMenuItem from './SidebarMenuItem'
-import { filterRouters } from '../../utils/router'
+import { filterRouters, generateMenus } from '../../utils/router'
+
 const router = useRouter()
 const data = [
   {
@@ -113,7 +114,9 @@ const data = [
  * 获取路由表的所有子数据
  */
 console.log('routes=>', router.getRoutes())
-filterRouters(router.getRoutes())
+
+const routes = filterRouters(router.getRoutes())
+generateMenus(routes)
 /**
  * 获取第一个路由
  * 将路由表的数据处理成菜单所需要的数据
